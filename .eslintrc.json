@@ -1,10 +1,32 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "plugins": [
+    "@nrwl/nx",
+    "import",
+    "@typescript-eslint/eslint-plugin"
+  ],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ]
+    },
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "extends": [
+        "airbnb-typescript/base",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
@@ -14,21 +36,122 @@
             "depConstraints": [
               {
                 "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "onlyDependOnLibsWithTags": [
+                  "*"
+                ]
               }
             ]
+          }
+        ],
+        "import/newline-after-import": [
+          "error",
+          {
+            "count": 2
+          }
+        ],
+        "complexity": [
+          "warn",
+          3
+        ],
+        "padding-line-between-statements": [
+          "error",
+          {
+            "blankLine": "always",
+            "prev": "*",
+            "next": "return"
+          }
+        ],
+        "max-len": [
+          "error",
+          {
+            "code": 90,
+            "tabWidth": 4,
+            "ignoreTemplateLiterals": true,
+            "ignoreStrings": true,
+            "ignoreRegExpLiterals": true,
+            "ignoreUrls": true,
+            "ignoreTrailingComments": true
+          }
+        ],
+        "@typescript-eslint/indent": [
+          "error",
+          4,
+          {
+            "MemberExpression": 1,
+            "ignoredNodes": [
+              "FunctionExpression > .params[decorators.length > 0 ]",
+              "FunctionExpression > .params > :matches(Decorator,:not(:first-child))",
+              "ClassBody.body > PropertyDefinition[decorators.length > 0] > .key"
+            ]
+          }
+        ],
+        "@typescript-eslint/no-shadow": "off",
+        "class-methods-use-this": "error",
+        "brace-style": [
+          "error",
+          "1tbs"
+        ],
+        "eol-last": [
+          "error",
+          "always"
+        ],
+        "linebreak-style": [
+          "error",
+          "unix"
+        ],
+        "lines-between-class-members": [
+          "error",
+          "always"
+        ],
+        "function-paren-newline": [
+          "error",
+          "consistent"
+        ],
+        "object-property-newline": "error",
+        "no-console": "error",
+        "no-multiple-empty-lines": [
+          "error",
+          {
+            "max": 2,
+            "maxEOF": 0
+          }
+        ],
+        "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "import/no-extraneous-dependencies": "off",
+        "import/extensions": "off",
+        "import/no-unresolved": "off",
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              "builtin",
+              "external",
+              "internal",
+              "index",
+              "sibling",
+              "parent",
+              "object",
+              "type"
+            ],
+            "newlines-between": "always-and-inside-groups"
           }
         ]
       }
     },
     {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
+      "files": [
+        "*.js",
+        "*.jsx"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/javascript"
+      ],
       "rules": {}
     }
   ]
