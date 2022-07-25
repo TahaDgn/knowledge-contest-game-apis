@@ -1,0 +1,57 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/socket-connection-handler/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/socket-connection-handler",
+        "main": "apps/socket-connection-handler/src/main.ts",
+        "tsConfig": "apps/socket-connection-handler/tsconfig.app.json",
+        "assets": ["apps/socket-connection-handler/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/socket-connection-handler/src/environments/environment.ts",
+              "with": "apps/socket-connection-handler/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "socket-connection-handler:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "socket-connection-handler:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/socket-connection-handler/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/socket-connection-handler"],
+      "options": {
+        "jestConfig": "apps/socket-connection-handler/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
